@@ -28,7 +28,7 @@ jobs:
     steps:
       - run:
           name: "save hello menna text"
-          command: echo "Hello Menna" > workspace/output.txt
+          command: echo "Hello Menna" > /tmp/workspace/output.txt
       - persist_to_workspace:
           root: /tmp/workspace/
           paths: 
