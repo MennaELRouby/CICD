@@ -22,7 +22,23 @@ jobs:
       - run:
           name: "env var echo my name"
           command: echo $MY_VAR_1
-
+  saved_hello_menna_output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "save hello menna text"
+          command: echo Hello Menna > workspace/output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths: 
+            - output.txt
+  print_output_file:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -33,3 +49,8 @@ workflows:
           requires:
             - print_hello
       - print_myname
+      - saved_hello_menna_output
+      - print_output_file:
+          requires:
+          - saved_hello_menna_output
+
