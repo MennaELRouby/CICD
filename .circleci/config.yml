@@ -28,9 +28,9 @@ jobs:
     steps:
       - run:
           name: "save hello menna text"
-          command: echo Hello Menna > workspace/output.txt
+          command: echo "Hello Menna" > workspace/output.txt
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: /tmp/workspace/
           paths: 
             - output.txt
   print_output_file:
@@ -39,6 +39,7 @@ jobs:
     steps:
       - attach_workspace:
           at: /tmp/workspace
+      - run: cat/tmp/workspace/output.txt
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
