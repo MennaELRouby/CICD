@@ -1,5 +1,8 @@
-
 version: 2.1
+command:
+  print_pipeline_id:
+    steps:
+      run: echo $CIRCLE_WORKFLOW_ID
 jobs:
   print_hello:
     docker:
@@ -40,6 +43,12 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+  print_workflow_id:
+    docker:
+       - image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -54,4 +63,5 @@ workflows:
       - print_output_file:
           requires:
           - saved_hello_menna_output
+      - print_workflow_id
 
