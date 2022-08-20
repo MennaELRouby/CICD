@@ -7,8 +7,8 @@ Resources:
     Properties:
       SecurityGroups: !Ref InstanceSecurityGroup
       KeyName: remote
-      ImageId: ami-052efd3df9dad4825
-      InstanceType: t2.micro
+      ImageId: 'ami-09e67e426f25ce0d7'
+      InstanceType: t3.micro
 
   InstanceSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
